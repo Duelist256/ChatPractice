@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class Messenger {
 
@@ -98,6 +99,7 @@ public class Messenger {
             String[] words = text.split(" ");
             String userName = words[1];
             userList.add(userName);
+            textArea.append(userName + " joined the chat\n");
             return;
         }
 
@@ -105,6 +107,7 @@ public class Messenger {
             String[] words = text.split(" ");
             String userName = words[1];
             userList.remove(userName);
+            textArea.append(userName + " left the chat\n");
             return;
         }
 
