@@ -3,6 +3,7 @@ package day170720;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class Messenger {
 
@@ -100,6 +101,27 @@ public class Messenger {
             String userName = words[1];
             userList.remove(userName);
             textArea.append(userName + " left the chat\n");
+            return;
+        }
+
+        if (text.startsWith("/nick")) {
+            String[] words = text.split(" ");
+            String oldName = words[1];
+            String newName = words[2];
+
+            String[] items = userList.getItems();
+            int index = -1;
+            for (int i = 0; i < items.length; i++) {
+                if (items[i].equals(oldName)) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1) {
+                userList.replaceItem(newName, index);
+            }
+
             return;
         }
 

@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public class ChatSession {
     private Socket socket;
-    private final String name;
+    private String name;
     private final long delay;
     private PrintWriter writer;
     private Scanner scanner;
@@ -35,8 +35,17 @@ public class ChatSession {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+
                 System.out.println(line);
-                broadcaster.accept(name + " > " + line);
+
+                if (line.startsWith("/nick ")) {
+                    String oldName = name;
+                    name = line.split(" ")[1];
+                    broadcaster.accept("/nick " + oldName + " " +name);
+                } else {
+                    broadcaster.accept(name + " > " + line);
+                }
+
             }
             sessionRemover.accept(this);
             socket.close();
