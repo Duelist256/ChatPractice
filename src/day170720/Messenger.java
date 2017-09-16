@@ -3,9 +3,6 @@ package day170720;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class Messenger {
 
@@ -54,12 +51,7 @@ public class Messenger {
 
         userList = new List(10, false);
 
-        userList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textField.setText(e.getActionCommand() + " ");
-            }
-        });
+        userList.addActionListener(e -> textField.setText(e.getActionCommand() + " "));
 
         panel.add(userList, BorderLayout.WEST);
 
