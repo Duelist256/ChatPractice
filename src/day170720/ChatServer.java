@@ -44,11 +44,24 @@ public class ChatServer {
                     System.out.println("Sessions size = " + sessions.size());
                     chatSession.processConnection(
                             ChatServer::broadcast,
-                            ChatServer::removeSession);
+                            ChatServer::removeSession, ChatServer::sendMsgFromTo);
                 }).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendMsgFromTo(String s) {
+        String[] data = s.split(" ", 4);
+        String sender = data[1];
+        String recipient = data[2];
+        String message = data[3];
+        for (ChatSession session : sessions) {
+            if (recipient.equals(session.getName())) {
+                session.send2Client("/msg " + sender + " " + message);
+                break;
+            }
         }
     }
 

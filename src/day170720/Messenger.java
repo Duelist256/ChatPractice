@@ -125,6 +125,24 @@ public class Messenger {
             return;
         }
 
+        if (text.startsWith("/msg")) {
+            String[] data = text.split(" ", 3);
+            String sender = data[1];
+            String message = data[2];
+            textArea.append("[from: " + sender + "] > " + message + "\n");
+            return;
+        }
+
+        if (text.startsWith("/mymsg")) {
+            String[] data = text.split(" ", 3);
+            String recipient = data[1];
+            String message = data[2];
+            textArea.append("[to: " + recipient + "] > " + message + "\n");
+            return;
+        }
+//        send2Client("/mymsg " + " " + recipient + " " + message);
+
+
         textArea.append(text + "\n");
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }

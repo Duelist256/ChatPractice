@@ -27,7 +27,8 @@ public class ChatSession {
     }
 
     void processConnection(Consumer<String> broadcaster,
-                           Consumer<ChatSession> sessionRemover) {
+                           Consumer<ChatSession> sessionRemover,
+                           Consumer<String> messageGetter) {
 
         try {
 
@@ -41,7 +42,15 @@ public class ChatSession {
                 if (line.startsWith("/nick ")) {
                     String oldName = name;
                     name = line.split(" ")[1];
-                    broadcaster.accept("/nick " + oldName + " " +name);
+                    broadcaster.accept("/nick " + oldName + " " + name);
+                } else if (line.startsWith("/msg ")) {
+                    String[] data = line.split(" ", 3);
+                    String recipient = data[1];
+                    String message = data[2];
+                    messageGetter.accept("/msg " + name + " " + recipient + " " + message);
+
+                    // fixme
+                    send2Client("/mymsg " + " " + recipient + " " + message);
                 } else {
                     broadcaster.accept(name + " > " + line);
                 }
