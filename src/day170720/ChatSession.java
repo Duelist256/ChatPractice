@@ -49,8 +49,7 @@ public class ChatSession {
                     String message = data[2];
                     messageGetter.accept("/msg " + name + " " + recipient + " " + message);
 
-                    // fixme
-                    send2Client("/mymsg " + " " + recipient + " " + message);
+                    send2Client("/mymsg " + recipient + " " + message);
                 } else {
                     broadcaster.accept(name + " > " + line);
                 }
