@@ -140,7 +140,6 @@ public class Messenger {
             textArea.append("[to: " + recipient + "] > " + message + "\n");
             return;
         }
-//        send2Client("/mymsg " + " " + recipient + " " + message);
 
 
         textArea.append(text + "\n");
